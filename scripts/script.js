@@ -3,16 +3,65 @@ var gridSize = document.getElementById('size');
 let grid = document.getElementById('grid');
 gridSize.textContent = `${slider.value*4}x${slider.value*4}`;
 
+const btnbrush = document.getElementById('brush');
+const btnmagic = document.getElementById('magic');
+const btnfill = document.getElementById('fill');
+const btneraise = document.getElementById('eraise');
+const toggleButtonsArray = [ btnbrush, btnmagic, btnfill, btneraise ]
+
+let mouseDown = false;
+document.body.onmouseup = () => (mouseDown = false);
+/*document.body.onmouseleave = () => (mouseDown = false);*/
+document.body.onmousedown = () => (mouseDown = true);
+
+function clearGrid(){
+    grid.innerHTML = '';
+}
+
+function drawing(e){
+    
+    if(e.type === 'mousedown'){
+        console.log(`MousePressed: ${mouseDown} | Type: `, e.type);
+    }
+    
+    if(e.type === 'mouseover' && !mouseDown) {return;}
+    e.target.style.backgroundColor = "#FFF";
+}
+
+function toggleButtons(array, idName){
+    array.forEach(element => 
+    {
+        if(element.classList.contains('active')) { element.classList.remove('active'); }
+        if(element.id == idName) {element.classList.add('active');}
+    });
+}
+
+function eventSubscriber(array){
+    console.log('subbed!');
+    array.forEach(element => 
+    {
+        element.onclick = () => updateMode(element.id);
+    });
+}
+
+function updateMode(mode){
+    toggleButtons(toggleButtonsArray, mode);
+}
+
 function createGrid(value){
-    grid.innerHTML = ''
-    grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`
-    grid.style.gridTemplateRows = `repeat(${value}, 1fr)` 
+    clearGrid();
+    grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${value}, 1fr)`;
 
     for (let index = 0; index < value; index++) {
         for (let index = 0; index < value; index++) {
             let pixel = document.createElement('div');
-            pixel.style.background="#505050"
-            pixel.style.border="1px solid #FFF"
+            pixel.style.background="#505050";
+            /*pixel.style.border="1px solid #d9d9d9";
+            pixel.setAttribute('draggable', 'false');*/
+            pixel.addEventListener("mouseup", drawing);
+            pixel.addEventListener("mouseover", drawing);
+            pixel.addEventListener("mousedown", drawing);
             grid.appendChild(pixel);
         }
     }
@@ -24,5 +73,6 @@ slider.oninput = function(){
 }
 
 window.onload = () => {
+    eventSubscriber(toggleButtonsArray);
     createGrid(slider.value*4);
 }

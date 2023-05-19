@@ -39,7 +39,22 @@ h1{
 button{
     width: 70px;
     height: 70px;
+    opacity: 0.7;
     border-radius: 8px;
+    background-color: #d9d9d9;
+}
+
+button:hover{
+    /*border: 20px solid #a7a7a7;*/
+    opacity: 1;
+    background-color: #e7e7e7;
+    transition-duration: 70ms;
+    transition-timing-function: linear;
+    transition-delay: 10ms;
+}
+
+button.active:hover{
+    opacity: 1;
     background-color: #d9d9d9;
 }
 
@@ -127,6 +142,11 @@ button{
     /*width: 50px;
     height: 50px;*/
     background-color: #505050;
+}
+
+.active{
+    border: 2px solid #505050;
+    opacity: 1;
 }
 
 *{
