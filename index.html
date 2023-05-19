@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch'a'sketch</title>
     <link href="styles/style.css" rel="stylesheet">
+    <script src="scripts/script.js" defer></script>
 </head>
 <body>
     <div class="header"><h1>PIXEL HUNTER</h1></div>
@@ -23,8 +24,8 @@
             </div>
         </div>
         <div class="middle">
-            <div class="grid">
-
+            <div class="grid" id="grid" style="grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(4, 1fr);">
+                
             </div>
         </div>
         <div class="right-side">
@@ -45,7 +46,8 @@
                 </div>
             </div>
 
-            <input type="range" min="8" max="256" value="16" class="slider" id="myRange"> 
+            <input type="range" min="1" max="16" value="4" class="slider" id="myRange">
+            <div id="size"></div>
 
             <div class="part inline">
                 <button type="button" id="toggle grid">grid</button>
