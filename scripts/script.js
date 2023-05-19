@@ -11,8 +11,10 @@ const toggleButtonsArray = [ btnbrush, btnmagic, btnfill, btneraise ]
 
 let mouseDown = false;
 document.body.onmouseup = () => (mouseDown = false);
-/*document.body.onmouseleave = () => (mouseDown = false);*/
+document.body.onmouseleave = () => (mouseDown = false);
 document.body.onmousedown = () => (mouseDown = true);
+
+
 
 function clearGrid(){
     grid.innerHTML = '';
@@ -62,6 +64,7 @@ function createGrid(value){
             pixel.addEventListener("mouseup", drawing);
             pixel.addEventListener("mouseover", drawing);
             pixel.addEventListener("mousedown", drawing);
+            
             grid.appendChild(pixel);
         }
     }
