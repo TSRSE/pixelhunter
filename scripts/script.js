@@ -21,6 +21,10 @@ btngridtoggle.onclick = () => toggleGridView(gridArray);
 const colorInput = document.getElementById('color-input');
 colorInput.onchange = () => changeColor();
 
+const btnclear = document.getElementById('clear');
+btnclear.onclick = () => createGrid(slider.value*4);
+
+
 let currentColor = '#FFFFFF';
 function changeColor(){
     currentColor = colorInput.value;
