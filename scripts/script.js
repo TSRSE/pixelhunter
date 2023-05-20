@@ -18,6 +18,14 @@ let gridArray = [];
 const btngridtoggle = document.getElementById('toggle-grid');
 btngridtoggle.onclick = () => toggleGridView(gridArray);
 
+const colorInput = document.getElementById('color-input');
+colorInput.onchange = () => changeColor();
+
+let currentColor = '#FFFFFF';
+function changeColor(){
+    currentColor = colorInput.value;
+}
+
 
 function toggleGridView(gridArray){
     btngridtoggle.classList.contains('active') ? btngridtoggle.classList.remove('active') : btngridtoggle.classList.add('active')
@@ -32,13 +40,12 @@ function clearGrid(){
 }
 
 function drawing(e){
-    
     if(e.type === 'mousedown'){
         console.log(`MousePressed: ${mouseDown} | Type: `, e.type);
     }
     
     if(e.type === 'mouseover' && !mouseDown) {return;}
-    e.target.style.backgroundColor = "#FFF";
+    e.target.style.backgroundColor = currentColor;
 }
 
 function toggleButtons(array, idName){

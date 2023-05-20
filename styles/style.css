@@ -52,7 +52,6 @@ button{
 }
 
 button:hover{
-    /*border: 20px solid #a7a7a7;*/
     opacity: 1;
     background-color: #e7e7e7;
     transition-duration: 70ms;
@@ -76,7 +75,6 @@ button.active:hover{
     width: 45px;
     height: 45px;
     border-radius: 8px;
-    border: 0px solid #505050;
     background-color: #000000;
 }
 
@@ -108,9 +106,27 @@ button.active:hover{
     gap: 12px;
 }
 
-.pick{
+#color-input{
     width: 100px;
+    height: 48px;
+    border: none;
+    padding: 0px;
+    margin: 0px;
 }
+
+#color-input::-webkit-color-swatch{
+    border-radius: 8px;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+#color-input::-moz-color-swatch{
+    border-radius: 8px;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+
 
 #pick{
     width: 46px;
@@ -146,8 +162,6 @@ button.active:hover{
 }
 
 .pixel{
-    /*width: 50px;
-    height: 50px;*/
     background-color: #8b2626;
     color: #000000;
 }
