@@ -170,6 +170,9 @@ button.active:hover{
     border: 2px solid #505050;
     opacity: 1;
 }
+.inactive{
+    opacity: 0.2;
+}
 
 *{
     border: 0px solid coral;

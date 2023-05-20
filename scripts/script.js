@@ -1,3 +1,6 @@
+let DEFAULT_COLOR = "#FFFFFF";
+let MODE = "brush";
+
 var slider = document.getElementById('myRange');
 var gridSize = document.getElementById('size');
 let grid = document.getElementById('grid');
@@ -19,15 +22,23 @@ const btngridtoggle = document.getElementById('toggle-grid');
 btngridtoggle.onclick = () => toggleGridView(gridArray);
 
 const colorInput = document.getElementById('color-input');
-colorInput.onchange = () => changeColor();
+colorInput.onchange = () => changeColor(colorInput.value);
 
 const btnclear = document.getElementById('clear');
 btnclear.onclick = () => createGrid(slider.value*4);
 
 
 let currentColor = '#FFFFFF';
-function changeColor(){
-    currentColor = colorInput.value;
+
+function changeColor(value){
+    switch (MODE) {
+        case 'eraise':
+            currentColor = DEFAULT_COLOR;
+            break;
+        case 'brush':
+            currentColor = value;
+            break;
+    }
 }
 
 
@@ -50,14 +61,16 @@ function drawing(e){
     
     if(e.type === 'mouseover' && !mouseDown) {return;}
     e.target.style.backgroundColor = currentColor;
+    
 }
 
 function toggleButtons(array, idName){
     array.forEach(element => 
     {
         if(element.classList.contains('active')) { element.classList.remove('active'); }
-        if(element.id == idName) {element.classList.add('active');}
+        if(element.id == idName) {element.classList.add('active'); MODE = element.id;}
     });
+    changeColor(currentColor);
 }
 
 function eventSubscriber(array){
