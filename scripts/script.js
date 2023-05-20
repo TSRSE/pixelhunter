@@ -99,15 +99,11 @@ function pickColor(e){
 }
 
 function drawing(e){
-    if(e.type === 'mousedown'){ console.log(`MousePressed: ${mouseDown} | Type: `, e.type); }
 
+    if(e.type === 'mousedown'){ console.log(`MousePressed: ${mouseDown} | Type: `, e.type); }
+    if(e.type === 'mousedown' && pickingColor) { pickColor(e); pickingColorToggle(); return; }
     if(e.type ==='mousedown' && MODE === 'fill'){fill(gridArray); return;}
-    if(e.type === 'mousedown' && pickingColor) 
-    {
-        pickColor(e); 
-        pickingColorToggle();
-        return;
-    }
+    
 
     if(e.type === 'mouseover' && !mouseDown) {return;}
     
