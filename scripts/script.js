@@ -48,6 +48,9 @@ function changeColor(value){
         case 'fill':
             DEFAULT_COLOR = value;
             break;
+        case 'magic':
+            currentColor = randomColor();
+            break;
     }
 }
 
@@ -88,6 +91,10 @@ function convertRgbToHex(rgb) {
     return "#" + r + g + b;
   }
 
+function randomColor(){
+    return "#" + Math.floor(Math.random()*16777215).toString(16);
+}
+
 function pickingColorToggle(){
     pickingColor = !pickingColor;
     btncolorpick.classList.contains('active') ? btncolorpick.classList.remove('active') : btncolorpick.classList.add('active');
@@ -99,14 +106,11 @@ function pickColor(e){
 }
 
 function drawing(e){
-
     if(e.type === 'mousedown'){ console.log(`MousePressed: ${mouseDown} | Type: `, e.type); }
     if(e.type === 'mousedown' && pickingColor) { pickColor(e); pickingColorToggle(); return; }
     if(e.type ==='mousedown' && MODE === 'fill'){fill(gridArray); return;}
-    
-
     if(e.type === 'mouseover' && !mouseDown) {return;}
-    
+    if(MODE === 'magic') {currentColor = randomColor();}
     e.target.style.backgroundColor = currentColor;
     
 }
