@@ -22,13 +22,13 @@ const btngridtoggle = document.getElementById('toggle-grid');
 btngridtoggle.onclick = () => toggleGridView(gridArray);
 
 const colorInput = document.getElementById('color-input');
+colorInput.value = "#FFFFFF"
 colorInput.onchange = () => changeColor(colorInput.value);
 
 const btnclear = document.getElementById('clear');
 btnclear.onclick = () => createGrid(slider.value*4);
 
-
-let currentColor = '#FFFFFF';
+let currentColor = colorInput.value;
 
 function changeColor(value){
     switch (MODE) {
@@ -38,9 +38,11 @@ function changeColor(value){
         case 'brush':
             currentColor = value;
             break;
+        case 'fill':
+            DEFAULT_COLOR = value;
+            break;
     }
 }
-
 
 function toggleGridView(gridArray){
     btngridtoggle.classList.contains('active') ? btngridtoggle.classList.remove('active') : btngridtoggle.classList.add('active')
@@ -54,12 +56,20 @@ function clearGrid(){
     gridArray = [];
 }
 
+function fill(array){
+    array.forEach(element => {
+        element.style.backgroundColor = DEFAULT_COLOR;
+    });
+}
+
 function drawing(e){
     if(e.type === 'mousedown'){
         console.log(`MousePressed: ${mouseDown} | Type: `, e.type);
     }
+    if(e.type ==='mousedown' && MODE === 'fill'){fill(gridArray); return;}
     
     if(e.type === 'mouseover' && !mouseDown) {return;}
+    
     e.target.style.backgroundColor = currentColor;
     
 }
@@ -94,9 +104,7 @@ function createGrid(value){
         for (let index = 0; index < value; index++) {
             let pixel = document.createElement('div');
             pixel.style.background="#505050";
-            if(btngridtoggle.classList.contains('active')){
-                pixel.style.border="1px solid #d9d9d9";
-            }
+            if(btngridtoggle.classList.contains('active')){ pixel.style.border="1px solid #d9d9d9"; }
             pixel.addEventListener("mouseover", drawing);
             pixel.addEventListener("mousedown", drawing);
             gridArray.push(pixel);
