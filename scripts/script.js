@@ -1,5 +1,4 @@
-let DEFAULT_COLOR = "#FFFFFF";
-let ERAISE_COLOR = "#FFFFFF";
+let DEFAULT_COLOR = "#505050";
 
 let MODE = "brush";
 
@@ -37,7 +36,6 @@ btncolorpick.onclick = () => pickingColorToggle();
 let currentColor = colorInput.value;
 
 function changeColor(value){
-    console.log(`${MODE} : ${currentColor}`);
     switch (MODE) {
         case 'eraise':
             currentColor = DEFAULT_COLOR;
@@ -106,13 +104,11 @@ function pickColor(e){
 }
 
 function drawing(e){
-    if(e.type === 'mousedown'){ console.log(`MousePressed: ${mouseDown} | Type: `, e.type); }
     if(e.type === 'mousedown' && pickingColor) { pickColor(e); pickingColorToggle(); return; }
     if(e.type ==='mousedown' && MODE === 'fill'){fill(gridArray); return;}
     if(e.type === 'mouseover' && !mouseDown) {return;}
     if(MODE === 'magic') {currentColor = randomColor();}
     e.target.style.backgroundColor = currentColor;
-    
 }
 
 function toggleButtons(array, idName){
@@ -125,7 +121,6 @@ function toggleButtons(array, idName){
 }
 
 function eventSubscriber(array){
-    console.log('subbed!');
     array.forEach(element => 
     {
         element.onclick = () => updateMode(element.id);
@@ -141,16 +136,14 @@ function createGrid(value){
     grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
     grid.style.gridTemplateRows = `repeat(${value}, 1fr)`;
 
-    for (let index = 0; index < value; index++) {
-        for (let index = 0; index < value; index++) {
-            let pixel = document.createElement('div');
-            pixel.style.background="#505050";
-            if(btngridtoggle.classList.contains('active')){ pixel.style.border="1px solid #d9d9d9"; }
-            pixel.addEventListener("mouseover", drawing);
-            pixel.addEventListener("mousedown", drawing);
-            gridArray.push(pixel);
-            grid.appendChild(pixel);
-        }
+    for (let index = 0; index < value*value; index++) {
+        let pixel = document.createElement('div');
+        pixel.style.background = DEFAULT_COLOR;
+        if(btngridtoggle.classList.contains('active')){ pixel.style.border="1px solid #d9d9d9"; }
+        pixel.addEventListener("mouseover", drawing);
+        pixel.addEventListener("mousedown", drawing);
+        gridArray.push(pixel);
+        grid.appendChild(pixel);
     }
 }
 
