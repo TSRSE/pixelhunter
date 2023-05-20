@@ -1,4 +1,6 @@
 let DEFAULT_COLOR = "#FFFFFF";
+let ERAISE_COLOR = "#FFFFFF";
+
 let MODE = "brush";
 
 var slider = document.getElementById('myRange');
@@ -35,6 +37,7 @@ btncolorpick.onclick = () => pickingColorToggle();
 let currentColor = colorInput.value;
 
 function changeColor(value){
+    console.log(`${MODE} : ${currentColor}`);
     switch (MODE) {
         case 'eraise':
             currentColor = DEFAULT_COLOR;
@@ -67,13 +70,10 @@ function fill(array){
 }
 
 function convertRgbToHex(rgb) {
-    // This will choose the correct separator, if there is a "," in your value it will use a comma, otherwise, a separator will not be used.
     var separator = rgb.indexOf(",") > -1 ? "," : " ";
-  
-    // This will convert "rgb(r,g,b)" into [r,g,b] so we can use the "+" to convert them back to numbers before using toString 
+
     rgb = rgb.substr(4).split(")")[0].split(separator);
   
-    // Here we will convert the decimal values to hexadecimal using toString(16)
     var r = (+rgb[0]).toString(16),
       g = (+rgb[1]).toString(16),
       b = (+rgb[2]).toString(16);
@@ -85,7 +85,6 @@ function convertRgbToHex(rgb) {
     if (b.length == 1)
       b = "0" + b;
   
-    // The return value is a concatenation of "#" plus the rgb values which will give you your hex
     return "#" + r + g + b;
   }
 
@@ -122,7 +121,7 @@ function toggleButtons(array, idName){
         if(element.classList.contains('active')) { element.classList.remove('active'); }
         if(element.id == idName) {element.classList.add('active'); MODE = element.id;}
     });
-    changeColor(currentColor);
+    changeColor(colorInput.value);
 }
 
 function eventSubscriber(array){
