@@ -14,10 +14,21 @@ document.body.onmouseup = () => (mouseDown = false);
 document.body.onmouseleave = () => (mouseDown = false);
 document.body.onmousedown = () => (mouseDown = true);
 
+let gridArray = [];
+const btngridtoggle = document.getElementById('toggle-grid');
+btngridtoggle.onclick = () => toggleGridView(gridArray);
 
+
+function toggleGridView(gridArray){
+    btngridtoggle.classList.contains('active') ? btngridtoggle.classList.remove('active') : btngridtoggle.classList.add('active')
+    gridArray.forEach(element => {
+        btngridtoggle.classList.contains('active') ? element.style.border="1px solid #d9d9d9" : element.style.border="0px";
+    });
+}
 
 function clearGrid(){
     grid.innerHTML = '';
+    gridArray = [];
 }
 
 function drawing(e){
@@ -59,12 +70,12 @@ function createGrid(value){
         for (let index = 0; index < value; index++) {
             let pixel = document.createElement('div');
             pixel.style.background="#505050";
-            /*pixel.style.border="1px solid #d9d9d9";
-            pixel.setAttribute('draggable', 'false');*/
-            pixel.addEventListener("mouseup", drawing);
+            if(btngridtoggle.classList.contains('active')){
+                pixel.style.border="1px solid #d9d9d9";
+            }
             pixel.addEventListener("mouseover", drawing);
             pixel.addEventListener("mousedown", drawing);
-            
+            gridArray.push(pixel);
             grid.appendChild(pixel);
         }
     }
