@@ -28,6 +28,10 @@ colorInput.onchange = () => changeColor(colorInput.value);
 const btnclear = document.getElementById('clear');
 btnclear.onclick = () => createGrid(slider.value*4);
 
+let pickingColor = false;
+const btncolorpick = document.getElementById('pick');
+btncolorpick.onclick = () => pickingColorToggle();
+
 let currentColor = colorInput.value;
 
 function changeColor(value){
@@ -62,12 +66,50 @@ function fill(array){
     });
 }
 
+function convertRgbToHex(rgb) {
+    // This will choose the correct separator, if there is a "," in your value it will use a comma, otherwise, a separator will not be used.
+    var separator = rgb.indexOf(",") > -1 ? "," : " ";
+  
+    // This will convert "rgb(r,g,b)" into [r,g,b] so we can use the "+" to convert them back to numbers before using toString 
+    rgb = rgb.substr(4).split(")")[0].split(separator);
+  
+    // Here we will convert the decimal values to hexadecimal using toString(16)
+    var r = (+rgb[0]).toString(16),
+      g = (+rgb[1]).toString(16),
+      b = (+rgb[2]).toString(16);
+  
+    if (r.length == 1)
+      r = "0" + r;
+    if (g.length == 1)
+      g = "0" + g;
+    if (b.length == 1)
+      b = "0" + b;
+  
+    // The return value is a concatenation of "#" plus the rgb values which will give you your hex
+    return "#" + r + g + b;
+  }
+
+function pickingColorToggle(){
+    pickingColor = !pickingColor;
+    btncolorpick.classList.contains('active') ? btncolorpick.classList.remove('active') : btncolorpick.classList.add('active');
+}
+
+function pickColor(e){
+        colorInput.value = convertRgbToHex(e.target.style.backgroundColor.toString());
+        changeColor(colorInput.value);
+}
+
 function drawing(e){
-    if(e.type === 'mousedown'){
-        console.log(`MousePressed: ${mouseDown} | Type: `, e.type);
-    }
+    if(e.type === 'mousedown'){ console.log(`MousePressed: ${mouseDown} | Type: `, e.type); }
+
     if(e.type ==='mousedown' && MODE === 'fill'){fill(gridArray); return;}
-    
+    if(e.type === 'mousedown' && pickingColor) 
+    {
+        pickColor(e); 
+        pickingColorToggle();
+        return;
+    }
+
     if(e.type === 'mouseover' && !mouseDown) {return;}
     
     e.target.style.backgroundColor = currentColor;
