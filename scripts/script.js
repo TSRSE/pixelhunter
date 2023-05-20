@@ -44,7 +44,7 @@ function changeColor(value){
             currentColor = value;
             break;
         case 'fill':
-            DEFAULT_COLOR = value;
+            currentColor = value;
             break;
         case 'magic':
             currentColor = randomColor();
@@ -66,7 +66,7 @@ function clearGrid(){
 
 function fill(array){
     array.forEach(element => {
-        element.style.backgroundColor = DEFAULT_COLOR;
+        element.style.backgroundColor = currentColor;
     });
 }
 
@@ -104,10 +104,11 @@ function pickColor(e){
 }
 
 function drawing(e){
-    if(e.type === 'mousedown' && pickingColor) { pickColor(e); pickingColorToggle(); return; }
-    if(e.type ==='mousedown' && MODE === 'fill'){fill(gridArray); return;}
     if(e.type === 'mouseover' && !mouseDown) {return;}
+    if(/*e.type === 'mousedown' && */pickingColor) { pickColor(e); pickingColorToggle(); return; }
+    if(/*e.type ==='mousedown' && */MODE === 'fill') {DEFAULT_COLOR = colorInput.value; fill(gridArray); return;}
     if(MODE === 'magic') {currentColor = randomColor();}
+
     e.target.style.backgroundColor = currentColor;
 }
 
