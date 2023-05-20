@@ -13,14 +13,26 @@
     <div class="main content">
         <div class="left-side">
             <div class="part">
-                <button type="button" class="active" id="brush">brush</button>
-                <button type="button" id="magic">magic</button>
-                <button type="button" id="fill">fill</button>
-                <button type="button" id="eraise">eraise</button>
+                <button type="button" class="active" id="brush">
+                    <img src="src/brush.svg" alt="brush" style="vertical-align: middle">
+                </button>
+                <button type="button" id="magic">
+                    <img src="src/magic.svg" alt="magic" style="vertical-align: middle">
+                </button>
+                <button type="button" id="fill">
+                    <img src="src/fill.svg" alt="fill" style="vertical-align: middle">
+                </button>
+                <button type="button" id="eraise">
+                    <img src="src/eraise.svg" alt="eraise" style="vertical-align: middle">
+                </button>
             </div>
             <div class="part">
-                <button type="button" id="clear">clear</button>
-                <button type="button" class="inactive" id="save">save</button>
+                <button type="button" id="clear">
+                    <img src="src/clear.svg" alt="clear" style="vertical-align: middle">
+                </button>
+                <button type="button" class="inactive" id="save">
+                    <img src="src/save.svg" alt="save" style="vertical-align: middle">
+                </button>
             </div>
         </div>
         <div onmousedown="event.preventDefault ? event.preventDefault() : event.returnValue = false" class="middle">
@@ -32,7 +44,9 @@
             <div class="part">
                 <div class="color-picker">
                     <input id="color-input" type="color">
-                    <button type="button" id="pick">picker</button>
+                    <button type="button" id="pick">
+                        <img src="src/pick.svg" alt="pick" style="vertical-align: middle">
+                    </button>
                 </div>
 
                 <div class="container">
@@ -49,8 +63,12 @@
             <div id="size"></div>
 
             <div class="part inline">
-                <button type="button" id="toggle-grid">grid</button>
-                <button type="button" class="inactive" id="toggle-theme">theme</button>
+                <button type="button" id="toggle-grid">
+                    <img src="src/grid.svg" alt="grid" style="vertical-align: middle">
+                </button>
+                <button type="button" class="inactive" id="toggle-theme">
+                    <img src="src/ligth-theme.svg" alt="ligth-theme" style="vertical-align: middle">
+                </button>
             </div>
         </div>
     </div>
